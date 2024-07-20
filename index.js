@@ -1,17 +1,55 @@
+// Runtime: O(n)
 function hasTargetSum(array, target) {
-  // Write your algorithm here
+  const seenNumbers = {};
+
+  for (const number of array) {
+    // n steps
+    const complement = target - number;
+    if (complement in seenNumbers) return true;
+    seenNumbers[number] = true;
+  }
+
+  return false;
 }
 
+// Runtime: O(n^2)
+// function hasTargetSum(array, target) {
+//   for (let i = 0; i < array.length; i++) {
+//     const complement = target - array[i];
+//     for (let j = i + 1; j < array.length; j++) {
+//       if (array[j] === complement) return true;
+//     }
+//   }
+
+//   return false;
+// }
+
+// O(n) runtime
+function findSock(array) {
+  for (const item of array) {
+    if (item === "sock") return "sock";
+  }
+}
+
+// O(1) runtime
+function findSock(object) {
+  if (object.sock) return "sock";
+}
 /* 
   Write the Big O time complexity of your function here
-*/
-
-/* 
-  Add your pseudocode here
+  Runtime: O(n^2)
+  Space: O(n)
 */
 
 /*
   Add written explanation of your solution here
+*//*
+  //take every integer of array 
+  //and check with other integers in array
+  //if not same num and their sum is equal to target
+  //return true if yes
+  //otherwise
+  //return false
 */
 
 // You can run `node index.js` to view these console logs
@@ -29,6 +67,16 @@ if (require.main === module) {
 
   console.log("Expecting: false");
   console.log("=>", hasTargetSum([1, 2, 5], 4));
+
+  console.log("");
+
+  console.log("Expecting: false");
+  console.log("=>", hasTargetSum([4], 4));
+
+  console.log("");
+
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([-1, 2, 7, 4], 6));
 }
 
 module.exports = hasTargetSum;
